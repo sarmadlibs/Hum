@@ -1,43 +1,39 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { signIn } from "../utils/auth";
-import "../styles/Login.css";
+import { signUp } from "../utils/auth";
+import "../styles/SignUp.css";
 
-const Login = ({ onLogin }) => {
+const SignUp = ({ onSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (email, password) => {
-    return signIn(email, password);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(email, password)
+    signUp(email, password)
       .then(() => {
-        onLogin();
-        navigate("/chat");
+        onSignUp();
+        navigate(`/confirm/${encodeURIComponent(email)}`);
       })
       .catch((error) => {
-        console.error("Login error:", error);
-        setError("Login failed, please try again.");
+        console.error("Sign up error:", error);
+        setError("Sign up failed, please try again.");
       });
   };
 
   return (
-    <div className="login-container">
-      <div className="login-content">
-        <h2>Login</h2>
+    <div className="signup-container">
+      <div className="signup-content">
+        <h2>Sign Up</h2>
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
-            <label className="loginLabel" htmlFor="email">
+            <label className="signupLabel" htmlFor="email">
               Email
             </label>
             <input
-              className="loginInput"
+              className="signupInput"
               id="email"
               type="email"
               placeholder="Enter your email"
@@ -47,11 +43,11 @@ const Login = ({ onLogin }) => {
             />
           </div>
           <div className="input-group">
-            <label className="loginLabel" htmlFor="password">
+            <label className="signupLabel" htmlFor="password">
               Password
             </label>
             <input
-              className="loginInput"
+              className="signupInput"
               id="password"
               type="password"
               placeholder="Enter your password"
@@ -60,12 +56,12 @@ const Login = ({ onLogin }) => {
               required
             />
           </div>
-          <button className="loginButton" type="submit">
-            Login
+          <button className="signupButton" type="submit">
+            Sign Up
           </button>
           <div className="register-link">
             <p>
-              Don't have an account? <Link to="/signup">Register here</Link>
+              Already have an account? <Link to="/">Login here</Link>
             </p>
           </div>
         </form>
@@ -74,4 +70,4 @@ const Login = ({ onLogin }) => {
   );
 };
 
-export default Login;
+export default SignUp;

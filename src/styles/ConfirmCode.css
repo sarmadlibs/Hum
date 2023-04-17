@@ -1,4 +1,4 @@
-.login-container {
+.cc-confirm-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6,7 +6,7 @@
   background-color: #34495e;
 }
 
-.login-content {
+.cc-confirm-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,40 +19,48 @@
   height: 350px;
 }
 
-.login-content h2 {
+.cc-confirm-content h2 {
   margin-bottom: 20px;
   color: #007bff;
 }
 
-.error-message {
+.cc-confirm-content p {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cc-error-message {
   color: #dc3545;
   margin-bottom: 10px;
   text-align: center;
 }
 
-.input-group {
+.cc-input-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 20px;
   width: 100%;
   max-width: 300px;
 }
 
-.loginLabel {
-  margin-bottom: 5px;
-  font-weight: bold;
+.cc-code-inputs {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
 }
 
-.loginInput {
+.cc-confirmCodeInput {
   border-radius: 5px;
   padding: 10px;
   font-size: 16px;
   border: none;
   background-color: #f0f2f5;
-  margin-bottom: 10px;
+  width: calc(100% / 6 - 10px);
+  text-align: center;
 }
 
-.loginButton {
+.cc-confirmButton {
   width: 100%;
   max-width: 300px;
   padding: 10px;
@@ -64,10 +72,6 @@
   border-radius: 5px;
 }
 
-.loginButton:hover {
+.cc-confirmButton:hover {
   background-color: #0056b3;
-}
-
-.register-link a {
-  color: #3137fd;
 }
