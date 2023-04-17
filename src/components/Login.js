@@ -12,6 +12,7 @@ const Login = ({ onLogin }) => {
   const handleLogin = (email, password) => {
     return signIn(email, password);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(email, password)
@@ -26,25 +27,44 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="Login">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="login-container">
+      <div className="login-content">
+        <h2>Login</h2>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label className="loginLabel" htmlFor="email">
+              Email
+            </label>
+            <input
+              className="loginInput"
+              id="email"
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label className="loginLabel" htmlFor="password">
+              Password
+            </label>
+            <input
+              className="loginInput"
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button className="loginButton" type="submit">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../styles/Chat.css";
+import SidePanel from "./SidePanel";
 import MessageBubble from "./MessageBubble";
-import { FaPaperPlane } from "react-icons/fa";
+import { FaPaperPlane, FaSearch } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
 function Chat({ user, onLogout }) {
@@ -21,34 +22,41 @@ function Chat({ user, onLogout }) {
 
   return (
     <div className="chat-container">
-      <header className="chat-header">
-        <h2>Chirp</h2>
-        <button className="btn btn-primary" onClick={onLogout}>
-          Logout
-        </button>
-      </header>
-      <div className="chat-messages">
-        {messages.map((msg, index) => (
-          <MessageBubble
-            key={index}
-            user={msg.user === user}
-            content={msg.content}
-            time={msg.time}
+      <SidePanel />
+      <div className="chat-main">
+        <header className="chat-header">
+          <div className="chat-search">
+            <FaSearch />
+            <input type="text" placeholder="Search" className="search-input" />
+          </div>
+          <h2>Chirp</h2>
+          <button className="btn btn-primary" onClick={onLogout}>
+            Logout
+          </button>
+        </header>
+        <div className="chat-messages">
+          {messages.map((msg, index) => (
+            <MessageBubble
+              key={index}
+              user={msg.user === user}
+              content={msg.content}
+              time={msg.time}
+            />
+          ))}
+        </div>
+        <form className="chat-form" onSubmit={handleSendMessage}>
+          <input
+            type="text"
+            placeholder="Type your message..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            className="chat-input"
           />
-        ))}
+          <button type="submit" className="chat-send-btn">
+            <FaPaperPlane />
+          </button>
+        </form>
       </div>
-      <form className="chat-form" onSubmit={handleSendMessage}>
-        <input
-          type="text"
-          placeholder="Type your message..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          className="chat-input"
-        />
-        <button type="submit" className="chat-send-btn">
-          <FaPaperPlane />
-        </button>
-      </form>
     </div>
   );
 }

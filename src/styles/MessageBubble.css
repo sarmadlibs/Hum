@@ -1,9 +1,9 @@
 .message-bubble {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   max-width: 70%;
   margin: 10px;
-  padding: 10px;
+  padding: 0px 10px;
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
