@@ -23,7 +23,13 @@ function MessageBubble({ content, user }) {
     : "message-bubble incoming";
 
   useEffect(() => {
-    setIsVisible(true);
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 10);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
