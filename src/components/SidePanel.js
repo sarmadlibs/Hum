@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/SidePanel.css";
 import Contact from "./Contact";
 
-function SidePanel() {
+function SidePanel({ onSelectChat }) {
   const dummyContacts = [
     {
       id: 1,
@@ -16,12 +16,12 @@ function SidePanel() {
     },
     {
       id: 3,
-      name: "Michael Johnson",
+      name: "Michael Jackson",
       profilePicture: "https://via.placeholder.com/40",
     },
     {
       id: 4,
-      name: "Emma Brown",
+      name: "Harry Potter",
       profilePicture: "https://via.placeholder.com/40",
     },
   ];
@@ -37,6 +37,7 @@ function SidePanel() {
             key={contact.id}
             name={contact.name}
             profilePicture={contact.profilePicture}
+            onSelectChat={() => onSelectChat(contact)}
           />
         ))}
       </div>
