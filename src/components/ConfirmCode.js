@@ -43,7 +43,7 @@ const ConfirmCode = () => {
     <input
       key={index}
       ref={(el) => (inputRefs.current[index] = el)}
-      className="confirmCodeInput"
+      className="cc-confirmCodeInput"
       type="text"
       maxLength="1"
       value={value}
@@ -54,14 +54,14 @@ const ConfirmCode = () => {
   ));
 
   return (
-    <div className="confirm-container">
-      <div className="confirm-content">
+    <div className="cc-confirm-container">
+      <div className="cc-confirm-content">
         <h2>Confirm Account</h2>
         <p>Please enter the confirmation code sent to your email.</p>
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="cc-error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
-          <div className="input-group code-inputs">{inputs}</div>
-          <button className="confirmButton" type="submit">
+          <div className="cc-input-group cc-code-inputs">{inputs}</div>
+          <button className="cc-confirmButton" type="submit">
             Confirm
           </button>
         </form>
