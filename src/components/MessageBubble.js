@@ -8,15 +8,14 @@ function MessageBubble({ content, user }) {
 
   const bubbleStyle = {
     alignSelf: isCurrentUser ? "flex-end" : "flex-start",
-    maxWidth: "35%",
+    maxWidth: "60%",
     wordBreak: "break-word",
     borderRadius: 16,
-    padding: 12,
-    marginBottom: 12,
+    marginBottom: 8,
     fontSize: 16,
-    opacity: isVisible ? 1 : 0, // set opacity based on visibility
-    transform: isVisible ? "translateY(0)" : "translateY(20px)", // set transform based on visibility
-    transition: "opacity 0.3s, transform 0.3s", // add transition
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? "translateY(0)" : "translateY(20px)",
+    transition: "opacity 0.3s, transform 0.3s",
   };
 
   const bubbleClassName = isCurrentUser
@@ -24,7 +23,6 @@ function MessageBubble({ content, user }) {
     : "message-bubble incoming";
 
   useEffect(() => {
-    // set the message bubble to visible after it has mounted
     setIsVisible(true);
   }, []);
 
