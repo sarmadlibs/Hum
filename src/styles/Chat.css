@@ -1,13 +1,14 @@
 .chat-container {
   display: flex;
   height: 100vh;
+  background-color: #34495e;
 }
 
 .chat-main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: #f8f9fa;
+  background-color: #34495e;
 }
 
 .chat-header {
@@ -15,7 +16,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background-color: #ffffff;
+  background-color: #4a6274;
   border-bottom: 1px solid #dee2e6;
 }
 
@@ -57,6 +58,7 @@
   align-items: center;
   padding: 0 15px;
   gap: 8px;
+  color: white;
 }
 
 .search-input {
@@ -64,6 +66,7 @@
   outline: none;
   background-color: transparent;
   font-size: 16px;
+  color: white;
 }
 
 .chat-header {
@@ -71,6 +74,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background-color: #ffffff;
+  background-color: #4a6274;
   border-bottom: 1px solid #dee2e6;
+}
+
+.Chirp-title {
+  color: white;
 }

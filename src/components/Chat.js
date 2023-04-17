@@ -29,7 +29,7 @@ function Chat({ user, onLogout }) {
             <FaSearch />
             <input type="text" placeholder="Search" className="search-input" />
           </div>
-          <h2>Chirp</h2>
+          <h2 className="Chirp-title">Chirp</h2>
           <button className="btn btn-primary" onClick={onLogout}>
             Logout
           </button>
