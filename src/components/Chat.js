@@ -30,7 +30,7 @@ function Chat({ user, onLogout }) {
             <input type="text" placeholder="Search" className="search-input" />
           </div>
           <h2 className="Chirp-title">Chirp</h2>
-          <button className="btn btn-primary" onClick={onLogout}>
+          <button className="logout-btn" onClick={onLogout}>
             Logout
           </button>
         </header>
