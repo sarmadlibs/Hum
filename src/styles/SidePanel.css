@@ -8,12 +8,25 @@
 }
 
 .side-panel-header {
-  padding: 19.5px;
+  padding: 29px;
   border-bottom: 1px solid #dee2e6;
   background-color: #4a6274;
   color: white;
+  display: flex;
 }
 .side-panel-content {
   flex-grow: 1;
   overflow-y: auto;
+}
+
+.chat-search {
+  margin-left: 4rem;
+}
+.search-input {
+  max-width: 115px;
+}
+
+.profile-popup-wrapper {
+  position: relative;
+  height: 100%;
 }
