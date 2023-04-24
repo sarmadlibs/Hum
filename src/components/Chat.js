@@ -10,6 +10,7 @@ function Chat({ user, onLogout }) {
   const [messages, setMessages] = useState([]);
   const [selectedChat, setSelectedChat] = useState(null);
   const [socket, setSocket] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   useEffect(() => {
     const ws = new WebSocket(
@@ -17,6 +18,7 @@ function Chat({ user, onLogout }) {
     );
     ws.onopen = () => {
       console.log("WebSocket connection opened");
+      setRetryCount(0);
     };
     ws.onmessage = (event) => {
       const message = JSON.parse(event.data);
@@ -24,13 +26,21 @@ function Chat({ user, onLogout }) {
     };
     ws.onclose = () => {
       console.log("WebSocket connection closed");
+      // Retry WebSocket connection after a delay
+      setTimeout(() => {
+        setRetryCount((count) => count + 1);
+      }, 5000); // 5 seconds delay before retrying
     };
+    ws.onerror = (event) => {
+      console.error("WebSocket error:", event);
+    };
+
     setSocket(ws);
 
     return () => {
       ws.close();
     };
-  }, []);
+  }, [retryCount]);
 
   const handleSendMessage = (e) => {
     e.preventDefault();

@@ -33,10 +33,8 @@ function App() {
     }
   }, []);
 
-  const handleSignUp = (email, password) => {
-    signUp(email, password).then((userData) => {
-      setUser(userData);
-    });
+  const handleSignUp = () => {
+    setUser({ name: "Logged in user" });
   };
 
   const handleLogin = (email, password) => {
