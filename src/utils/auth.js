@@ -2,11 +2,12 @@ import {
   CognitoUserPool,
   CognitoUser,
   AuthenticationDetails,
+  CognitoUserAttribute,
 } from "amazon-cognito-identity-js";
 
 const poolData = {
-  UserPoolId: "us-east-1_1mfui3DzD",
-  ClientId: "1v3tjg243iitu1oig6nv0v4ikk",
+  UserPoolId: process.env.REACT_APP_USER_POOL_ID,
+  ClientId: process.env.REACT_APP_CLIENT_ID,
 };
 
 const userPool = new CognitoUserPool(poolData);
@@ -15,13 +16,17 @@ export function isAuthenticated() {
   return getCurrentUser() !== null;
 }
 
-export function signUp(email, password) {
+export function signUp(email, password, name) {
   return new Promise((resolve, reject) => {
     const attributeList = [
-      {
+      new CognitoUserAttribute({
         Name: "email",
         Value: email,
-      },
+      }),
+      new CognitoUserAttribute({
+        Name: "name",
+        Value: name,
+      }),
     ];
 
     userPool.signUp(email, password, attributeList, null, (err, result) => {

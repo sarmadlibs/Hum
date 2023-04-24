@@ -4,6 +4,7 @@ import { signUp } from "../utils/auth";
 import "../styles/SignUp.css";
 
 const SignUp = ({ onSignUp }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -11,7 +12,7 @@ const SignUp = ({ onSignUp }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signUp(email, password)
+    signUp(email, password, name)
       .then(() => {
         onSignUp();
         navigate(`/confirm/${encodeURIComponent(email)}`);
@@ -28,6 +29,20 @@ const SignUp = ({ onSignUp }) => {
         <h2>Sign Up</h2>
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label className="signupLabel" htmlFor="name">
+              Name
+            </label>
+            <input
+              className="signupInput"
+              id="name"
+              type="text"
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
           <div className="input-group">
             <label className="signupLabel" htmlFor="email">
               Email
