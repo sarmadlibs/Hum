@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/Chat.css";
 import SidePanel from "./SidePanel";
 import MessageBubble from "./MessageBubble";
-import { FaPaperPlane, FaSearch } from "react-icons/fa";
+import { FaPaperPlane } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
 function Chat({ user, onLogout }) {
@@ -67,10 +67,6 @@ function Chat({ user, onLogout }) {
       <SidePanel onSelectChat={handleSelectChat} />
       <div className="chat-main">
         <header className="chat-header">
-          <div className="chat-search">
-            <FaSearch />
-            <input type="text" placeholder="Search" className="search-input" />
-          </div>
           <h2 className="Chirp-title">
             {selectedChat ? selectedChat.name : "Chirp"}
           </h2>
