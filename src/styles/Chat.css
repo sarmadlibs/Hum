@@ -37,10 +37,11 @@
 .chat-input {
   flex-grow: 1;
   border: none;
-  padding: 5px 10px;
+  padding: 12px 10px;
   border-radius: 15px;
   background-color: #e9ecef;
   outline: none;
+  font-size: 1rem;
 }
 
 .chat-send-btn {
@@ -51,8 +52,12 @@
   margin-left: 10px;
   cursor: pointer;
   outline: none;
+  transition: 0.2s ease-in-out;
 }
 
+.chat-send-btn:hover {
+  transform: scale(1.2);
+}
 .chat-search {
   display: flex;
   align-items: center;

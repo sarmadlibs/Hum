@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "../styles/SidePanel.css";
 import Contact from "./Contact";
 import ProfilePopup from "./ProfilePopup";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaEdit } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import userImg from "../assets/img/user.png";
 
@@ -57,13 +57,20 @@ function SidePanel({ onSelectChat }) {
   return (
     <div className="side-panel">
       <div className="side-panel-header">
-        <img
+        <div
+          className="user-profile-image-container"
           ref={profileImageRef}
-          src={userImg}
-          alt="User profile"
-          className="user-profile-image"
           onClick={toggleProfilePopup}
-        />
+        >
+          <img
+            src={userImg}
+            alt="User profile"
+            className="user-profile-image"
+          />
+          <div className="image-overlay">
+            <FaEdit />
+          </div>
+        </div>
         <div className="chat-search">
           <FaSearch />
           <input type="text" placeholder="Search" className="search-input" />

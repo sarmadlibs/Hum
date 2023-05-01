@@ -1,5 +1,5 @@
 .side-panel {
-  width: 300px;
+  width: 400px;
   height: 100%;
   background-color: #34495e;
   border-right: 1px solid #dee2e6;
@@ -8,7 +8,7 @@
 }
 
 .side-panel-header {
-  padding: 29px;
+  padding: 27.5px;
   border-bottom: 1px solid #dee2e6;
   background-color: #4a6274;
   color: white;
@@ -20,10 +20,10 @@
 }
 
 .chat-search {
-  margin-left: 4rem;
+  margin-left: 8rem;
 }
 .search-input {
-  max-width: 115px;
+  max-width: 130px;
 }
 
 .profile-popup-wrapper {
