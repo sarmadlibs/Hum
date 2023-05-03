@@ -9,15 +9,11 @@ const Login = ({ onLogin }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (email, password) => {
-    return signIn(email, password);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(email, password)
-      .then(() => {
-        onLogin();
+    signIn(email, password)
+      .then((userData) => {
+        onLogin(userData); // Pass the entire userData object instead of just email and password
         navigate("/chat");
       })
       .catch((error) => {

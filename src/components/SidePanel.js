@@ -4,7 +4,7 @@ import Contact from "./Contact";
 import ProfilePopup from "./ProfilePopup";
 import { FaSearch, FaEdit } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
-import userImg from "../assets/img/user.png";
+import userImg from "../assets/img/user2.svg";
 
 function SidePanel({ onSelectChat }) {
   const [showProfilePopup, setShowProfilePopup] = useState(false);
@@ -55,8 +55,8 @@ function SidePanel({ onSelectChat }) {
   };
 
   return (
-    <div className="side-panel">
-      <div className="side-panel-header">
+    <div className="side-panel glassmorphic">
+      <div className="side-panel-header glassmorphic">
         <div
           className="user-profile-image-container"
           ref={profileImageRef}
@@ -65,18 +65,18 @@ function SidePanel({ onSelectChat }) {
           <img
             src={userImg}
             alt="User profile"
-            className="user-profile-image"
+            className="user-profile-image glassmorphic"
           />
-          <div className="image-overlay">
+          <div className="image-overlay glassmorphic">
             <FaEdit />
           </div>
         </div>
-        <div className="chat-search">
+        <div className="chat-search glassmorphic">
           <FaSearch />
           <input type="text" placeholder="Search" className="search-input" />
         </div>
         <ProfilePopup
-          className={showProfilePopup ? "show" : ""}
+          className={showProfilePopup ? "show glassmorphic" : ""}
           onClose={toggleProfilePopup}
         />
       </div>

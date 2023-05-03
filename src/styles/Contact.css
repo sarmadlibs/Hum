@@ -3,11 +3,14 @@
   align-items: center;
   padding: 10px;
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: 0.08s ease-in;
 }
 
 .contact:hover {
-  background-color: #f0f2f5;
+  background: rgba(255, 180, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .contact-image {
@@ -24,5 +27,5 @@
 }
 
 .contact:hover .contact-name {
-  color: black;
+  color: mediumslateblue;
 }

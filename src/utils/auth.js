@@ -70,7 +70,16 @@ export function signIn(email, password) {
 
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (result) => {
-        resolve({ name: "User", email: email });
+        cognitoUser.getUserAttributes((err, attributes) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          const nameAttribute = attributes.find(
+            (attr) => attr.getName() === "name"
+          );
+          resolve({ name: nameAttribute.getValue(), email: email });
+        });
       },
       onFailure: (err) => {
         reject(err);
