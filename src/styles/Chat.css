@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,700|Raleway:400,700|Nunito:400,700&display=swap");
+
 .chat-container {
   display: flex;
   height: 100vh;
@@ -24,8 +26,10 @@
 }
 
 .chat-title {
-  font-size: 1.64rem;
+  font-size: 1.62rem;
   color: aqua;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
 }
 
 .header-right {
@@ -123,6 +127,7 @@
 .user-greeting {
   margin-right: 1rem;
   display: inline-block;
+  font-family: "Quicksand", sans-serif;
 }
 
 .logo {

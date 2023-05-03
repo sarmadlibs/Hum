@@ -22,8 +22,8 @@
 
 .contact-name {
   margin: 0;
-  font-size: 16px;
   color: white;
+  font-family: "Quicksand", sans-serif;
 }
 
 .contact:hover .contact-name {
