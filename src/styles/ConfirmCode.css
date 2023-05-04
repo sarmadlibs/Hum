@@ -20,6 +20,7 @@
   max-width: 500px;
   height: 350px;
   color: white;
+  font-family: "Quicksand", sans-serif;
 }
 
 .cc-confirm-content h2 {
@@ -62,6 +63,7 @@
   width: calc(100% / 6 - 10px);
   text-align: center;
   color: white;
+  font-family: "Quicksand", sans-serif;
 }
 
 .cc-confirmCodeInput:-webkit-autofill {

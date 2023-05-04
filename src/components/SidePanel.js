@@ -1,4 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+import axios from "axios";
+import AWS from "../awsConfig";
+import { CognitoIdentityServiceProvider, DynamoDB } from "aws-sdk";
+
 import "../styles/SidePanel.css";
 import Contact from "./Contact";
 import ProfilePopup from "./ProfilePopup";
@@ -6,32 +10,101 @@ import { FaSearch, FaEdit } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import userImg from "../assets/img/user2.svg";
 
-function SidePanel({ onSelectChat }) {
+const userPoolId = process.env.REACT_APP_USER_POOL_ID;
+
+function SidePanel({
+  user,
+  userName,
+  onSelectChat,
+  onUpdateContactProfileImage,
+}) {
   const [showProfilePopup, setShowProfilePopup] = useState(false);
-  const dummyContacts = [
-    {
-      id: 1,
-      name: "John Doe",
-      profilePicture: userImg,
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      profilePicture: userImg,
-    },
-    {
-      id: 3,
-      name: "Michael Jackson",
-      profilePicture: userImg,
-    },
-    {
-      id: 4,
-      name: "Harry Potter",
-      profilePicture: userImg,
-    },
-  ];
+  const [contacts, setContacts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [userProfileImage, setUserProfileImage] = useState(userImg);
 
   const profileImageRef = useRef(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const cognito = new CognitoIdentityServiceProvider();
+      const dynamoDb = new AWS.DynamoDB();
+
+      const params = {
+        UserPoolId: userPoolId,
+      };
+
+      try {
+        const response = await cognito.listUsers(params).promise();
+        const users = response.Users.map(async (user) => {
+          const userId = user.Username;
+          const userName = user.Attributes.find(
+            (attr) => attr.Name === "name"
+          ).Value;
+
+          const params = {
+            TableName: "UserProfile",
+            Key: {
+              userId: { S: userId },
+            },
+          };
+
+          let userProfileImage = userImg;
+          try {
+            const response = await dynamoDb.getItem(params).promise();
+            if (response.Item && response.Item.profileImage) {
+              userProfileImage = response.Item.profileImage.S;
+            }
+          } catch (error) {
+            console.error(
+              "Error fetching profile image from the database:",
+              error
+            );
+          }
+
+          return {
+            id: userId,
+            name: userName,
+            profilePicture: userProfileImage,
+          };
+        });
+
+        const resolvedUsers = await Promise.all(users);
+        const filteredUsers = resolvedUsers.filter(
+          (contact) => contact.id !== user.id
+        );
+        setContacts(filteredUsers);
+        onUpdateContactProfileImage(filteredUsers);
+      } catch (error) {
+        console.error("An error occurred while fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserProfileImage = async () => {
+      const dynamoDb = new AWS.DynamoDB();
+      const params = {
+        TableName: "UserProfile",
+        Key: {
+          userId: { S: user.id },
+        },
+      };
+
+      try {
+        const response = await dynamoDb.getItem(params).promise();
+        if (response.Item && response.Item.profileImage) {
+          setUserProfileImage(response.Item.profileImage.S);
+        }
+      } catch (error) {
+        console.error("Error fetching profile image from the database:", error);
+      }
+    };
+
+    fetchUserProfileImage();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -54,6 +127,25 @@ function SidePanel({ onSelectChat }) {
     setShowProfilePopup(!showProfilePopup);
   };
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const updateUserProfileImage = (userId, imageUrl) => {
+    setContacts((prevContacts) => {
+      return prevContacts.map((contact) => {
+        if (contact.id === userId) {
+          return { ...contact, profilePicture: imageUrl };
+        }
+        return contact;
+      });
+    });
+  };
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="side-panel glassmorphic">
       <div className="side-panel-header glassmorphic">
@@ -63,7 +155,7 @@ function SidePanel({ onSelectChat }) {
           onClick={toggleProfilePopup}
         >
           <img
-            src={userImg}
+            src={userProfileImage}
             alt="User profile"
             className="user-profile-image glassmorphic"
           />
@@ -73,15 +165,24 @@ function SidePanel({ onSelectChat }) {
         </div>
         <div className="chat-search glassmorphic">
           <FaSearch />
-          <input type="text" placeholder="Search" className="search-input" />
+          <input
+            type="text"
+            placeholder="Search"
+            className="search-input"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
         </div>
         <ProfilePopup
+          userId={user.id}
           className={showProfilePopup ? "show glassmorphic" : ""}
           onClose={toggleProfilePopup}
+          setUserProfileImage={setUserProfileImage}
+          updateUserProfileImage={updateUserProfileImage}
         />
       </div>
       <div className="side-panel-content">
-        {dummyContacts.map((contact) => (
+        {filteredContacts.map((contact) => (
           <Contact
             key={contact.id}
             name={contact.name}

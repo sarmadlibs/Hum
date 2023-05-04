@@ -4,7 +4,6 @@ import SidePanel from "./SidePanel";
 import MessageBubble from "./MessageBubble";
 import { FaPaperPlane } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
-// import birdLogo from "../assets/img/bird-logo-legit.png";
 import birdLogo from "../assets/img/humming.png";
 
 function Chat({ user, onLogout }) {
@@ -14,6 +13,7 @@ function Chat({ user, onLogout }) {
   const [socket, setSocket] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
   const [userName, setUserName] = useState("");
+  const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
     if (user && user.name) {
@@ -84,7 +84,12 @@ function Chat({ user, onLogout }) {
 
   return (
     <div className="chat-container">
-      <SidePanel onSelectChat={handleSelectChat} />
+      <SidePanel
+        user={{ ...user, id: user.name }}
+        userName={userName}
+        onSelectChat={handleSelectChat}
+      />
+
       <div className="chat-main">
         <header className="chat-header">
           {selectedChat ? (

@@ -15,9 +15,10 @@
   color: white;
   display: flex;
   /* border-bottom-right-radius: 15px; */
-  border-bottom-left-radius: 30px;
+  border-bottom-left-radius: 50px;
   /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); */
-  box-shadow: inset 5px 0 px rgba(0, 0, 0, 0.5);
+  /* box-shadow: inset 5px 0 px rgba(0, 0, 0, 0.5); */
+  box-shadow: inset 0px 0 8px rgba(0, 0, 0, 0.5);
 }
 
 .user-profile-image-container {

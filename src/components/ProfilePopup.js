@@ -3,10 +3,18 @@ import AWS from "../awsConfig";
 import "../styles/ProfilePopup.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { DynamoDB } from "aws-sdk";
 
 const s3 = new AWS.S3();
 
-const ProfilePopup = ({ className, onClose }) => {
+const ProfilePopup = ({
+  userId,
+  className,
+  onClose,
+  setUserProfileImage,
+  updateUserProfileImage,
+  onUpdateContactProfileImage,
+}) => {
   const fileInputRef = useRef(null);
 
   const handleFileChange = (e) => {
@@ -14,7 +22,7 @@ const ProfilePopup = ({ className, onClose }) => {
     if (file) {
       const params = {
         Bucket: "chirp-assets",
-        Key: `profile-pictures/${file.name}`,
+        Key: `profile-pictures/${userId}/${file.name}`,
         Body: file,
         ContentType: file.type,
       };
@@ -25,9 +33,52 @@ const ProfilePopup = ({ className, onClose }) => {
           toast.error("Error uploading profile image.");
         } else {
           toast.success("Profile image uploaded successfully!");
+          updateProfileImage(userId, data.Location).then(() => {
+            updateUserProfileImage(userId, data.Location);
+          });
         }
       });
     }
+  };
+
+  const updateProfileImage = async (userId, imageUrl) => {
+    if (!imageUrl) {
+      console.error(
+        "Error updating profile image in the database: Image URL is empty or undefined"
+      );
+      return;
+    }
+
+    console.log("UserId:", userId);
+    console.log("ImageUrl:", imageUrl);
+
+    const dynamoDb = new DynamoDB();
+
+    const params = {
+      TableName: "UserProfile",
+      Key: {
+        userId: { S: userId },
+      },
+      UpdateExpression: "SET profileImage = :imageUrl",
+      ExpressionAttributeValues: {
+        ":imageUrl": { S: imageUrl },
+      },
+      ReturnValues: "UPDATED_NEW",
+    };
+
+    try {
+      const response = await dynamoDb.updateItem(params).promise();
+      console.log("Profile image updated:", response);
+
+      // Update the image URL in the parent component
+      setUserProfileImage(imageUrl);
+    } catch (error) {
+      console.error("Error updating profile image in the database:", error);
+      throw error;
+    }
+
+    setUserProfileImage(imageUrl);
+    onUpdateContactProfileImage(userId, imageUrl);
   };
 
   const handlePopupClick = (e) => {
