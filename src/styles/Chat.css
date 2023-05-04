@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,700|Raleway:400,700|Nunito:400,700&display=swap");
+
 .chat-container {
   display: flex;
   height: 100vh;
@@ -8,7 +10,8 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  background-color: #34495e;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 .chat-header {
@@ -16,8 +19,22 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background-color: #4a6274;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(to bottom right, #2b3c4d, #2d4052);
+  color: white;
+  box-shadow: inset 0px 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.chat-title {
+  font-size: 1.61rem;
+  color: aqua;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
 }
 
 .chat-messages {
@@ -30,17 +47,30 @@
 
 .chat-form {
   display: flex;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid grey;
   padding: 10px;
 }
 
 .chat-input {
   flex-grow: 1;
   border: none;
-  padding: 5px 10px;
+  padding: 12px 10px;
   border-radius: 15px;
-  background-color: #e9ecef;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
   outline: none;
+  font-size: 1rem;
+  color: white;
+  transition: 0.2s ease-in-out;
+  font-family: "Quicksand", sans-serif;
+}
+
+.chat-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.chat-input:focus {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .chat-send-btn {
@@ -51,8 +81,12 @@
   margin-left: 10px;
   cursor: pointer;
   outline: none;
+  transition: 0.2s ease-in-out;
 }
 
+.chat-send-btn:hover {
+  transform: scale(1.2);
+}
 .chat-search {
   display: flex;
   align-items: center;
@@ -67,15 +101,6 @@
   background-color: transparent;
   font-size: 16px;
   color: white;
-}
-
-.chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  background-color: #4a6274;
-  border-bottom: 1px solid #dee2e6;
 }
 
 .Chirp-title {
@@ -98,4 +123,21 @@
 
 .logout-btn:hover {
   background-color: #0069d9;
+}
+
+.user-greeting {
+  margin-right: 1rem;
+  display: inline-block;
+  font-family: "Quicksand", sans-serif;
+}
+
+.logo {
+  width: 4.8rem;
+  height: auto;
+  margin-right: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover {
+  transform: rotate(-10deg);
 }

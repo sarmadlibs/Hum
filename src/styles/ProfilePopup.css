@@ -1,22 +1,46 @@
-.user-profile-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.user-profile-image-container {
+  position: relative;
+  display: inline-block;
   cursor: pointer;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.image-overlay svg {
+  color: white;
+  width: 16px;
+  height: 16px;
+}
+
+.user-profile-image-container:hover .image-overlay {
+  opacity: 1;
 }
 
 .profile-popup {
   position: absolute;
   top: 70px;
-  left: -320px;
-  width: 280px;
+  left: -400px;
+  width: 300px;
   height: auto;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 180, 255, 0.1);
   border-radius: 0 8px 8px 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: 50px;
   transition: left 0.3s ease-in-out;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(25px);
 }
 
 .profile-popup.show {
@@ -28,6 +52,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+  font-family: "Quicksand", sans-serif;
 }
 
 .close-btn {
@@ -36,7 +61,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #34495e;
+  color: white;
 }
 
 .profile-popup-content {
@@ -52,7 +77,13 @@
   background-color: #3498db;
   color: white;
   border-radius: 4px;
-  font-weight: 500;
+  font-weight: 800;
+  transition: 0.2s ease-in-out;
+  font-family: "Quicksand", sans-serif;
+}
+
+.file-upload-label:hover {
+  background-color: #2979b9;
 }
 
 input[type="file"] {

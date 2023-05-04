@@ -25,11 +25,17 @@ const ChatWrapper = ({ user, onLogout }) => {
 };
 
 function App() {
-  const [user, setUser] = useState(null);
+  const storedName = localStorage.getItem("userName");
+  const [user, setUser] = useState(storedName ? { name: storedName } : null);
 
   useEffect(() => {
     if (isAuthenticated()) {
-      setUser({ name: "Logged in user" });
+      const storedName = localStorage.getItem("userName");
+      if (storedName) {
+        setUser({ name: storedName });
+      } else {
+        setUser(null);
+      }
     }
   }, []);
 
@@ -37,10 +43,8 @@ function App() {
     setUser({ name: "Logged in user" });
   };
 
-  const handleLogin = (email, password) => {
-    signIn(email, password).then((userData) => {
-      setUser(userData);
-    });
+  const handleLogin = (userData) => {
+    setUser(userData);
   };
 
   const handleLogout = () => {
