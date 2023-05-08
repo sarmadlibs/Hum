@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import anime from "animejs";
+
 import "../styles/Chat.css";
 import SidePanel from "./SidePanel";
 import MessageBubble from "./MessageBubble";
+import AnimatedChatTitle from "./AnimatedChatTitle";
 import { FaPaperPlane } from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 import birdLogo from "../assets/img/humming.png";
@@ -13,7 +16,6 @@ function Chat({ user, onLogout }) {
   const [socket, setSocket] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
   const [userName, setUserName] = useState("");
-  const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
     if (user && user.name) {
@@ -30,7 +32,7 @@ function Chat({ user, onLogout }) {
     }
 
     const ws = new WebSocket(
-      "wss://1iw89h7ej1.execute-api.us-east-1.amazonaws.com/production"
+      "wss://0gsjak620c.execute-api.us-east-1.amazonaws.com/production"
     );
     ws.onopen = () => {
       console.log("WebSocket connection opened");
@@ -40,16 +42,15 @@ function Chat({ user, onLogout }) {
       const message = JSON.parse(event.data);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { ...message, user: message.user.name === userName },
+        { ...message, user: message.user === userName },
       ]);
     };
 
     ws.onclose = () => {
       console.log("WebSocket connection closed");
-      // Retry WebSocket connection after a delay
       setTimeout(() => {
         setRetryCount((count) => count + 1);
-      }, 5000); // 5 seconds delay before retrying
+      }, 5000);
     };
     ws.onerror = (event) => {
       console.error("WebSocket error:", event);
@@ -65,16 +66,21 @@ function Chat({ user, onLogout }) {
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (message.trim() && socket) {
-      const newMessage = {
-        id: uuidv4(),
-        user: user,
-        content: message,
-        time: new Date(),
-      };
-      socket.send(
-        JSON.stringify({ action: "sendMessage", message: newMessage })
-      );
-      setMessage("");
+      if (socket.readyState === WebSocket.OPEN) {
+        const newMessage = {
+          id: uuidv4(),
+          user: user,
+          content: message,
+          time: new Date(),
+        };
+        socket.send(
+          JSON.stringify({ action: "sendMessage", data: newMessage })
+        );
+
+        setMessage("");
+      } else {
+        console.error("WebSocket is not in the OPEN state");
+      }
     }
   };
 
@@ -92,11 +98,13 @@ function Chat({ user, onLogout }) {
 
       <div className="chat-main">
         <header className="chat-header">
-          {selectedChat ? (
-            <h2 className="chat-title">{selectedChat.name}</h2>
-          ) : (
-            <img src={birdLogo} alt="Chirp Logo" className="logo" />
-          )}
+          <div className="chat-title-container">
+            {selectedChat ? (
+              <AnimatedChatTitle text={selectedChat.name} />
+            ) : (
+              <img src={birdLogo} alt="Chirp Logo" className="logo" />
+            )}
+          </div>
           <div className="header-right">
             {userName ? (
               <>

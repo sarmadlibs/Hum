@@ -3,7 +3,7 @@
   align-items: center;
   padding: 10px;
   cursor: pointer;
-  transition: 0.08s ease-in;
+  transition: 0.2s ease-in-out;
 }
 
 .contact:hover {
@@ -25,10 +25,10 @@
 
 .contact-name {
   margin: 0;
-  color: white;
   font-family: "Quicksand", sans-serif;
+  transition: 0.4s ease-in-out;
 }
 
 .contact:hover .contact-name {
-  color: mediumslateblue;
+  color: mediumpurple;
 }

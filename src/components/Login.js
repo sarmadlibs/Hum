@@ -1,7 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import anime from "animejs";
+import Letterize from "letterizejs";
 import { useNavigate, Link } from "react-router-dom";
+import Lottie from "react-lottie";
 import { signIn } from "../utils/auth";
 import "../styles/Login.css";
+import animationData from "../assets/humming.json";
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -9,11 +22,14 @@ const Login = ({ onLogin }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const titleRef = useRef(null);
+  const messageRef = useRef(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     signIn(email, password)
       .then((userData) => {
-        onLogin(userData); // Pass the entire userData object instead of just email and password
+        onLogin(userData);
         navigate("/chat");
       })
       .catch((error) => {
@@ -24,6 +40,11 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="login-container">
+      <div className="login-title">HUM</div>
+      <div className="catchphrase"> Let your conversations take flight..</div>
+      <div className="animation-login-container">
+        <Lottie options={defaultOptions} height={200} width={200} />
+      </div>
       <div className="login-content">
         <h2>Login</h2>
         {error && <div className="error-message">{error}</div>}
