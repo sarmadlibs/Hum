@@ -45,6 +45,7 @@ function App() {
 
   const handleLogin = (userData) => {
     setUser(userData);
+    localStorage.setItem("userId", userData.id);
   };
 
   const handleLogout = () => {

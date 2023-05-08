@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signUp } from "../utils/auth";
+import Lottie from "react-lottie";
 import "../styles/SignUp.css";
+import animationData from "../assets/humming.json";
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 const SignUp = ({ onSignUp }) => {
   const [name, setName] = useState("");
@@ -25,6 +36,7 @@ const SignUp = ({ onSignUp }) => {
 
   return (
     <div className="signup-container">
+      <div className="signup-title">HUM</div>
       <div className="signup-content">
         <h2>Sign Up</h2>
         {error && <div className="error-message">{error}</div>}
@@ -80,6 +92,9 @@ const SignUp = ({ onSignUp }) => {
             </p>
           </div>
         </form>
+      </div>
+      <div className="animation-signUp-container">
+        <Lottie options={defaultOptions} height={200} width={200} />
       </div>
     </div>
   );

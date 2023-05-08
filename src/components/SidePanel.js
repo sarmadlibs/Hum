@@ -12,12 +12,7 @@ import userImg from "../assets/img/user2.svg";
 
 const userPoolId = process.env.REACT_APP_USER_POOL_ID;
 
-function SidePanel({
-  user,
-  userName,
-  onSelectChat,
-  onUpdateContactProfileImage,
-}) {
+function SidePanel({ user, userName, onSelectChat }) {
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [contacts, setContacts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -71,10 +66,9 @@ function SidePanel({
 
         const resolvedUsers = await Promise.all(users);
         const filteredUsers = resolvedUsers.filter(
-          (contact) => contact.id !== user.id
+          (contact) => contact.id !== localStorage.getItem("userId")
         );
         setContacts(filteredUsers);
-        onUpdateContactProfileImage(filteredUsers);
       } catch (error) {
         console.error("An error occurred while fetching users:", error);
       }
@@ -148,50 +142,52 @@ function SidePanel({
 
   return (
     <div className="side-panel glassmorphic">
-      <div className="side-panel-header glassmorphic">
-        <div
-          className="user-profile-image-container"
-          ref={profileImageRef}
-          onClick={toggleProfilePopup}
-        >
-          <img
-            src={userProfileImage}
-            alt="User profile"
-            className="user-profile-image glassmorphic"
-          />
-          <div className="image-overlay glassmorphic">
-            <FaEdit />
+      <div className="side-panel-inner">
+        <div className="side-panel-header glassmorphic">
+          <div
+            className="user-profile-image-container"
+            ref={profileImageRef}
+            onClick={toggleProfilePopup}
+          >
+            <img
+              src={userProfileImage}
+              alt="User profile"
+              className="user-profile-image glassmorphic"
+            />
+            <div className="image-overlay glassmorphic">
+              <FaEdit />
+            </div>
           </div>
-        </div>
-        <div className="chat-search glassmorphic">
-          <FaSearch />
-          <input
-            type="text"
-            placeholder="Search"
-            className="search-input"
-            value={searchTerm}
-            onChange={handleSearchChange}
+          <div className="chat-search glassmorphic">
+            <FaSearch />
+            <input
+              type="text"
+              placeholder="Search"
+              className="search-input"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
+          <ProfilePopup
+            userId={user.id}
+            className={showProfilePopup ? "show glassmorphic" : ""}
+            onClose={toggleProfilePopup}
+            setUserProfileImage={setUserProfileImage}
+            updateUserProfileImage={updateUserProfileImage}
           />
         </div>
-        <ProfilePopup
-          userId={user.id}
-          className={showProfilePopup ? "show glassmorphic" : ""}
-          onClose={toggleProfilePopup}
-          setUserProfileImage={setUserProfileImage}
-          updateUserProfileImage={updateUserProfileImage}
-        />
+        <div className="side-panel-content">
+          {filteredContacts.map((contact) => (
+            <Contact
+              key={contact.id}
+              name={contact.name}
+              profilePicture={contact.profilePicture}
+              onSelectChat={() => onSelectChat(contact)}
+            />
+          ))}
+        </div>
+        <ToastContainer />
       </div>
-      <div className="side-panel-content">
-        {filteredContacts.map((contact) => (
-          <Contact
-            key={contact.id}
-            name={contact.name}
-            profilePicture={contact.profilePicture}
-            onSelectChat={() => onSelectChat(contact)}
-          />
-        ))}
-      </div>
-      <ToastContainer />
     </div>
   );
 }

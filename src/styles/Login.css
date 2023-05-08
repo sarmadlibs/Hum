@@ -3,29 +3,58 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(135deg, #2c345a, #1d2239);
+  backdrop-filter: blur(20px);
+}
+
+.login-title {
+  font-size: 4.5rem;
+  font-weight: bold;
+  text-align: center;
+  background: linear-gradient(90deg, aquamarine, mediumpurple);
+  background-clip: text;
+  color: transparent;
+  position: absolute;
+  top: 0;
+  margin-top: 2rem;
+  font-family: "Quicksand", sans-serif;
+}
+
+.catchphrase {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  background: linear-gradient(90deg, aquamarine, mediumpurple);
+  background-clip: text;
+  color: transparent;
+  font-family: "Quicksand", sans-serif;
+}
+
+.animation-login-container {
+  margin-bottom: 50px;
 }
 
 .login-content {
+  margin-right: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: rgba(255, 200, 255, 0.1);
+  background-color: rgba(29, 34, 57, 0.6);
   backdrop-filter: blur(10px);
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
-  width: 75%;
-  max-width: 500px;
-  height: 350px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
+  width: 400px;
   color: white;
   font-family: "Quicksand", sans-serif;
 }
 
 .login-content h2 {
   margin-bottom: 20px;
-  color: #007bff;
+  background: linear-gradient(90deg, aquamarine, mediumpurple);
+  background-clip: text;
+  color: transparent;
 }
 
 .error-message {
@@ -53,7 +82,8 @@
   padding: 10px;
   font-size: 16px;
   border: none;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
   margin-bottom: 10px;
   color: white;
   transition: background-color 5000s ease-in-out;
@@ -72,19 +102,29 @@
   width: 100%;
   max-width: 300px;
   padding: 10px;
-  font-size: 16px;
-  background-color: #007bff;
+  font-size: 18px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  background: linear-gradient(45deg, aquamarine, mediumpurple);
   color: #fff;
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  transition: 0.2s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .loginButton:hover {
-  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
+.register-link {
+  text-decoration: none;
+  position: relative;
+  background: linear-gradient(to right, aquamarine, mediumpurple);
+  background-clip: text;
+  color: transparent;
+  font-family: "Quicksand";
+}
 .register-link a {
-  color: #3137fd;
+  text-decoration: none;
 }
