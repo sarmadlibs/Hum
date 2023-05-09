@@ -44,10 +44,13 @@
   transition: left 0.3s ease-in-out;
   backdrop-filter: blur(4px);
   z-index: 1;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
 }
 
 .profile-popup.show {
   left: 0;
+  opacity: 1;
 }
 
 .profile-popup-header {
