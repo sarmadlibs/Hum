@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import anime from "animejs";
-import Letterize from "letterizejs";
 import { useNavigate, Link } from "react-router-dom";
 import Lottie from "react-lottie";
 import { signIn } from "../utils/auth";
@@ -22,8 +21,32 @@ const Login = ({ onLogin }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const titleRef = useRef(null);
   const messageRef = useRef(null);
+
+  useEffect(() => {
+    const chars = "Let your conversations take flight..".split("");
+    const $text = messageRef.current;
+    $text.innerHTML = chars.map((c, i) => `<span>${c}</span>`).join("");
+
+    anime({
+      targets: $text.querySelectorAll("span"),
+      color: [
+        { value: "#2c345a" },
+        { value: "#7FFFD4" },
+        { value: "#FFFFFF" },
+        { value: "#9370DB" },
+      ],
+      duration: 2500,
+      delay: anime.stagger(50),
+      loop: true,
+      easing: "linear",
+      direction: "alternate",
+    });
+
+    return () => {
+      anime.remove($text.querySelectorAll("span"));
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,8 +63,11 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="login-container">
-      <div className="login-title">HUM</div>
-      <div className="catchphrase"> Let your conversations take flight..</div>
+      <h2 className="login-title">HUM</h2>
+      <div className="catchphrase" ref={messageRef}>
+        {" "}
+        Let your conversations take flight..
+      </div>
       <div className="animation-login-container">
         <Lottie options={defaultOptions} height={200} width={200} />
       </div>
