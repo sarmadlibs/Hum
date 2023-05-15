@@ -70,8 +70,9 @@ function SidePanel({ user, userName, onSelectChat }) {
 
         const resolvedUsers = await Promise.all(users);
         const filteredUsers = resolvedUsers.filter(
-          (contact) => contact.id !== localStorage.getItem("userId")
+          (contact) => contact.email !== user.id
         );
+
         setContacts(filteredUsers);
       } catch (error) {
         console.error("An error occurred while fetching users:", error);
@@ -178,6 +179,7 @@ function SidePanel({ user, userName, onSelectChat }) {
             onClose={toggleProfilePopup}
             setUserProfileImage={setUserProfileImage}
             updateUserProfileImage={updateUserProfileImage}
+            onUpdateContactProfileImage={updateUserProfileImage}
           />
         </div>
         <div className="side-panel-content">
