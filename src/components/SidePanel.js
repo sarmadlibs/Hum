@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import AWS from "../awsConfig";
+// import AWS from "../awsConfig";
 import { CognitoIdentityServiceProvider, DynamoDB } from "../awsConfig";
 
 import "../styles/SidePanel.css";
@@ -84,7 +84,7 @@ function SidePanel({ user, userName, onSelectChat }) {
 
   useEffect(() => {
     const fetchUserProfileImage = async () => {
-      const dynamoDb = new AWS.DynamoDB();
+      const dynamoDb = new DynamoDB();
       const params = {
         TableName: "UserProfile",
         Key: {

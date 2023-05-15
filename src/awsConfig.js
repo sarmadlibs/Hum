@@ -9,4 +9,4 @@ AWS.config.update({
 export const CognitoIdentityServiceProvider =
   AWS.CognitoIdentityServiceProvider;
 export const DynamoDB = AWS.DynamoDB;
-export default AWS;
+// export default AWS;
