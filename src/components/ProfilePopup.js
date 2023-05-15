@@ -3,7 +3,7 @@ import AWS from "../awsConfig";
 import "../styles/ProfilePopup.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DynamoDB } from "aws-sdk";
+import { DynamoDB } from "../awsConfig";
 
 const s3 = new AWS.S3();
 

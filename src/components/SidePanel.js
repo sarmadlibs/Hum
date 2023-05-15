@@ -23,7 +23,7 @@ function SidePanel({ user, userName, onSelectChat }) {
   useEffect(() => {
     const fetchUsers = async () => {
       const cognito = new CognitoIdentityServiceProvider();
-      const dynamoDb = new AWS.DynamoDB();
+      const dynamoDb = new DynamoDB();
 
       const params = {
         UserPoolId: userPoolId,
