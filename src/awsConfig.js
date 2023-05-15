@@ -6,7 +6,7 @@ AWS.config.update({
   secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
 });
 
-const CognitoIdentityServiceProvider = AWS.CognitoIdentityServiceProvider;
-const DynamoDB = AWS.DynamoDB;
-
-export { CognitoIdentityServiceProvider, DynamoDB };
+export const CognitoIdentityServiceProvider =
+  AWS.CognitoIdentityServiceProvider;
+export const DynamoDB = AWS.DynamoDB;
+export default AWS;
