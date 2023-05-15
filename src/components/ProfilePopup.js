@@ -3,9 +3,7 @@ import AWS from "../awsConfig";
 import "../styles/ProfilePopup.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { DynamoDB } from "../awsConfig";
-
-const s3 = new AWS.S3();
+import { cognito, dynamoDb, s3 } from "../awsConfig";
 
 const ProfilePopup = ({
   userId,
@@ -51,8 +49,6 @@ const ProfilePopup = ({
 
     console.log("UserId:", userId);
     console.log("ImageUrl:", imageUrl);
-
-    const dynamoDb = new DynamoDB();
 
     const params = {
       TableName: "UserProfile",
