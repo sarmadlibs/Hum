@@ -28,7 +28,15 @@
   font-family: "Quicksand", sans-serif;
   transition: 0.4s ease-in-out;
 }
+.contact-email {
+  margin: 1;
+  font-family: "Quicksand", sans-serif;
+  transition: 0.4s ease-in-out;
+}
 
 .contact:hover .contact-name {
+  color: mediumpurple;
+}
+.contact:hover .contact-email {
   color: mediumpurple;
 }

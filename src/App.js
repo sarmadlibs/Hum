@@ -29,13 +29,17 @@ const ChatWrapper = ({ user, onLogout }) => {
 
 function App() {
   const storedName = localStorage.getItem("userName");
-  const [user, setUser] = useState(storedName ? { name: storedName } : null);
+  const storedEmail = localStorage.getItem("userEmail");
+  const [user, setUser] = useState(
+    storedName ? { name: storedName, email: storedEmail } : null
+  );
 
   useEffect(() => {
     if (isAuthenticated()) {
       const storedName = localStorage.getItem("userName");
-      if (storedName) {
-        setUser({ name: storedName });
+      const storedEmail = localStorage.getItem("userEmail");
+      if (storedName && storedEmail) {
+        setUser({ name: storedName, email: storedEmail });
       } else {
         setUser(null);
       }
@@ -48,12 +52,15 @@ function App() {
 
   const handleLogin = (userData) => {
     setUser(userData);
-    localStorage.setItem("userId", userData.id);
+    localStorage.setItem("userName", userData.name);
+    localStorage.setItem("userEmail", userData.email);
   };
 
   const handleLogout = () => {
     signOut();
     setUser(null);
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userEmail");
   };
 
   function AppRoutes() {

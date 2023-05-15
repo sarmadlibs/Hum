@@ -10,7 +10,7 @@
 
 .message-bubble.incoming {
   align-self: flex-start;
-  background-color: #007bff;
+  background-color: mediumpurple;
   color: #fff;
   max-width: 80%;
 }

@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/MessageBubble.css";
 
-function MessageBubble({ content, user }) {
-  const [isCurrentUser] = useState(user.name === "You");
+function MessageBubble({ message, user }) {
+  const [isCurrentUser] = useState(message.user === "You");
   const [isVisible, setIsVisible] = useState(false);
-  const messageRef = useRef(null);
 
   const bubbleStyle = {
     alignSelf: isCurrentUser ? "flex-end" : "flex-start",
@@ -33,9 +32,8 @@ function MessageBubble({ content, user }) {
   }, []);
 
   return (
-    <div className={bubbleClassName} style={bubbleStyle} ref={messageRef}>
-      <p className="meta">{user.name}</p>
-      <p className="content">{content}</p>
+    <div className={bubbleClassName} style={bubbleStyle}>
+      <p className="content">{message.message}</p>
     </div>
   );
 }
