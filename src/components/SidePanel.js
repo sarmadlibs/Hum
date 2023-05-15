@@ -36,6 +36,9 @@ function SidePanel({ user, userName, onSelectChat }) {
           const userName = user.Attributes.find(
             (attr) => attr.Name === "name"
           ).Value;
+          const userEmail = user.Attributes.find(
+            (attr) => attr.Name === "email"
+          ).Value;
 
           const params = {
             TableName: "UserProfile",
@@ -60,6 +63,7 @@ function SidePanel({ user, userName, onSelectChat }) {
           return {
             id: userId,
             name: userName,
+            email: userEmail,
             profilePicture: userProfileImage,
           };
         });
@@ -181,6 +185,7 @@ function SidePanel({ user, userName, onSelectChat }) {
             <Contact
               key={contact.id}
               name={contact.name}
+              email={contact.email} // should i be testing to see which emails come back
               profilePicture={contact.profilePicture}
               onSelectChat={() => onSelectChat(contact)}
             />

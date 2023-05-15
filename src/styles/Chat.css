@@ -1,7 +1,7 @@
 .chat-container {
   display: flex;
   height: 100vh;
-  background: linear-gradient(135deg, #2c345a, #1d2239);
+  background: linear-gradient(135deg, #1d2239 #2c345a);
 }
 
 .chat-main {
@@ -9,7 +9,7 @@
   flex-direction: column;
   flex-grow: 1;
   background: linear-gradient(135deg, #2c345a, #1d2239);
-  border-radius: 20px;
+  overflow: hidden;
   padding: 20px;
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
 }
@@ -54,9 +54,7 @@
 
 .chat-form {
   display: flex;
-  border-top: 1px solid #444;
-  padding: 10px;
-  background: linear-gradient(135deg, #2c345a, #1d2239);
+  /* background: linear-gradient(135deg, #1d2239); */
   border-radius: 20px;
   box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
 }
@@ -73,6 +71,8 @@
   color: white;
   transition: 0.2s ease-in-out;
   font-family: "Quicksand", sans-serif;
+  border-top: 1px solid grey;
+  border-left: 1px solid grey;
 }
 
 .chat-input::placeholder {
@@ -86,7 +86,7 @@
 .chat-send-btn {
   background-color: transparent;
   border: none;
-  color: mediumpurple;
+  color: aquamarine;
   font-size: 1.5rem;
   margin-left: 10px;
   cursor: pointer;
@@ -96,7 +96,7 @@
 
 .chat-send-btn:hover {
   transform: scale(1.05);
-  color: aquamarine;
+  color: mediumpurple;
 }
 
 .chat-search {
