@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import AWS from "../awsConfig";
-import { CognitoIdentityServiceProvider, DynamoDB } from "aws-sdk";
+import { CognitoIdentityServiceProvider, DynamoDB } from "../awsConfig";
 
 import "../styles/SidePanel.css";
 import Contact from "./Contact";
