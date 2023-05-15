@@ -157,7 +157,7 @@ function Chat({ user, onLogout }) {
   return (
     <div className="chat-container">
       <SidePanel
-        user={{ ...user, id: user.email }}
+        user={{ ...user, id: user.name }}
         userName={userName}
         onSelectChat={handleSelectChat}
       />
