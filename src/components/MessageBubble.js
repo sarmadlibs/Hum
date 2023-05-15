@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import "../styles/MessageBubble.css";
 
 function MessageBubble({ message, user }) {
-  const [isCurrentUser] = useState(message.user === "You");
+  const [isCurrentUser] = useState(message?.senderEmail?.S === user);
   const [isVisible, setIsVisible] = useState(false);
 
   const bubbleStyle = {
     alignSelf: isCurrentUser ? "flex-end" : "flex-start",
-    maxWidth: "60%",
+    // maxWidth: "60%",
     wordBreak: "break-word",
-    borderRadius: 16,
     marginBottom: 8,
-    fontSize: 16,
     opacity: isVisible ? 1 : 0,
     transform: isVisible ? "translateY(0)" : "translateY(20px)",
     transition: "opacity 0.3s, transform 0.3s",
@@ -31,9 +29,27 @@ function MessageBubble({ message, user }) {
     };
   }, []);
 
+  const timestamp = message?.timestamp?.S
+    ? new Date(message.timestamp.S).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+        hourCycle: "h12",
+      })
+    : "";
+
   return (
-    <div className={bubbleClassName} style={bubbleStyle}>
-      <p className="content">{message.message}</p>
+    <div
+      className={
+        isCurrentUser
+          ? "message-container outgoing"
+          : "message-container incoming"
+      }
+    >
+      <div className={bubbleClassName} style={bubbleStyle}>
+        <p className="content">{message.message}</p>
+      </div>
+      {timestamp && <p className="timestamp">{timestamp}</p>}
     </div>
   );
 }
